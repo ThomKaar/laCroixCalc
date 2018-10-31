@@ -48,44 +48,49 @@ def main():
    print "Costco Ratio is: " + str(costcoRatio)
    """
  
-   introInfo()  
-   flavorProfile = collectFlavorProfile()
+   introInfo()
+   continue_flag = 'y'
+   while(continue_flag == 'y'):
+   
+      flavorProfile = collectFlavorProfile()
  
-   """
-   The following is the calculations needed for a finding the ValueRatio for packs of La Croix containing only one flavor
-   The ValueRatio = price of package / (tasteCoefficient of flavor X * # of flavor X in the package)
-   """
-   tasteCoefficient = max(flavorProfile)
-   flavorPackageRatio = SINGLE_FLAVOR_PRCNT
-   packagePleasantness = calcPleasantness(tasteCoefficient,flavorPackageRatio)
-   smartValueRatio = calcValueRatio(smartPrice, packagePleasantness, smartQuantity * smartPackSize)
-   vonsValueRatio = calcValueRatio(vonsPrice, packagePleasantness, vonsQuantity * vonsPackSize)
+      """
+      The following is the calculations needed for a finding the ValueRatio for packs of La Croix containing only one flavor
+      The ValueRatio = price of package / (tasteCoefficient of flavor X * # of flavor X in the package)
+      """
+      tasteCoefficient = max(flavorProfile)
+      flavorPackageRatio = SINGLE_FLAVOR_PRCNT
+      packagePleasantness = calcPleasantness(tasteCoefficient,flavorPackageRatio)
+      smartValueRatio = calcValueRatio(smartPrice, packagePleasantness, smartQuantity * smartPackSize)
+      vonsValueRatio = calcValueRatio(vonsPrice, packagePleasantness, vonsQuantity * vonsPackSize)
 
    
-   """
-   The following are the calculations needed for finding the ValueRatio for packs of LaCroix containing multiple flavors.
-   The ValueRatio = price of package / summation(tasteCoefficient of flavor X * # of flavor X in the package)
-   """
+      """
+      The following are the calculations needed for finding the ValueRatio for packs of LaCroix containing multiple flavors.
+      The ValueRatio = price of package / summation(tasteCoefficient of flavor X * # of flavor X in the package)
+      """
    
-   availableIndexes = buildAvailableIndexesMixed(flavorProfile)
-   #for index in availableIndexes:
-   #   print '(' + str(index[0]) + ',' +  str(index[1]) + ')'
-   packagePleasantnessMixed = calcMixedpackagePleasantness(flavorProfile,availableIndexes, costcoPackSize)
-   #print "packagePleasantnessMixed: " + str(packagePleasantnessMixed)
-   costcoValueRatio = calcValueRatioMixed(costcoPrice, packagePleasantnessMixed)   
+      availableIndexes = buildAvailableIndexesMixed(flavorProfile)
+      #for index in availableIndexes:
+      #   print '(' + str(index[0]) + ',' +  str(index[1]) + ')'
+      packagePleasantnessMixed = calcMixedpackagePleasantness(flavorProfile,availableIndexes, costcoPackSize)
+      #print "packagePleasantnessMixed: " + str(packagePleasantnessMixed)
+      costcoValueRatio = calcValueRatioMixed(costcoPrice, packagePleasantnessMixed)   
   
-   print "\n\nThe following ratios are price per can of La Croix scaled to your taste preferences:" 
-   print "   smartValueRatio:  " + str(smartValueRatio)
-   print "   vonsValueRatio:   " + str(vonsValueRatio)
-   print "   costcoValueRatio: " + str(costcoValueRatio)  
-   print " "
-   if smartValueRatio >  vonsValueRatio and vonsValueRatio < costcoValueRatio:
-      print "Smart and Final La Croix and Costco La Croix are inferior.\nThe best bang for your buck is Vons La Croix."
-   elif vonsValueRatio > smartValueRatio and smartValueRatio < costcoValueRatio:
-      print "Vons La Croix and Costco La Croix are the weaker choices.\nThe bubblier choice is Smart and Final La Croix"
-   elif costcoValueRatio < smartValueRatio and costcoValueRatio < vonsValueRatio:
-      print "Costco La Croix is the cat's meow.\nAll other La Croix choices can't compare to it's purrfection." 
+      print "\n\nThe following ratios are price per can of La Croix scaled to your taste preferences:" 
+      print "   smartValueRatio:  " + str(smartValueRatio)
+      print "   vonsValueRatio:   " + str(vonsValueRatio)
+      print "   costcoValueRatio: " + str(costcoValueRatio)  
+      print " "
+      if smartValueRatio >  vonsValueRatio and vonsValueRatio < costcoValueRatio:
+         print "Smart and Final La Croix and Costco La Croix are inferior.\nThe best bang for your buck is Vons La Croix."
+      elif vonsValueRatio > smartValueRatio and smartValueRatio < costcoValueRatio:
+         print "Vons La Croix and Costco La Croix are the weaker choices.\nThe bubblier choice is Smart and Final La Croix"
+      elif costcoValueRatio < smartValueRatio and costcoValueRatio < vonsValueRatio:
+         print "Costco La Croix is the cat's meow.\nAll other La Croix choices can't compare to it's purrfection." 
 
+      continue_flag = raw_input("Would you like to run the script again (y/n)")
+   
 #determines the value of a LaCroix factoring in taste preferences
 def calcValueRatio(price, packagePleasantness, quantity):
    return price/(packagePleasantness*quantity)
