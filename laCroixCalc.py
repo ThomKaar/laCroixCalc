@@ -1,4 +1,5 @@
 from array import array
+from lc_Unit import lc_Unit
 
 #Constants:
 LIME_INDEX = 1
@@ -48,6 +49,7 @@ def main():
    print("Costco Ratio is: " + str(costcoRatio))
    """
  
+   
    introInfo()
    continue_flag = 'y'
    while(continue_flag == 'y'):
