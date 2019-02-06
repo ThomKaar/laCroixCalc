@@ -5,6 +5,7 @@ Functionality Wishlist:
 * Database of prices
 * Database of prices by location
 * Price Detection using images
+* Flavor Detection using images
 ___
 
 * Last updated 02/05
